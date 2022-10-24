@@ -5,8 +5,12 @@ import Location from "./location";
 
 const Container = styled.div`
 display:flex;
+flex-direction:row;
+flex-wrap: wrap;
 height:300px;
 border-style: solid;
+margin: 0 4% 1% 4%;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `;
 
 const FirstBody = styled.li`
@@ -25,8 +29,6 @@ a {
 
 const SecondBody = styled.li`
 display: flex;
-flex-direction: column;
-justify-content: flex-start;
 padding: 40px;
 
 a {    
@@ -39,9 +41,7 @@ a {
 
 const ThirdBody = styled.div`
 width:100%;
-display: flex;
-float:right;
-justify-content: flex-end;
+
 padding: 70px 20px 0 0;
 
 p {    
@@ -63,7 +63,7 @@ const Footer = () => {
     return (    
      <Container>
            <FirstBody>         
-                  <a>Form</a>
+                  <a>Get To Know Us Everyday</a>
                   <Form />               
            </FirstBody>
            <SeperationBar />
