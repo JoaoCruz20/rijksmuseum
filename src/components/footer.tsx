@@ -57,7 +57,7 @@ p {
 const SeperationBar = styled.div`
 border-style: solid;
 border-radius: 3px;
-margin: 20px 0 0 0;
+margin: 20px 0 20px 0;
 `;
 
 
@@ -72,9 +72,6 @@ const Footer = () => {
            <SecondBody>        
                <Location />      
            </SecondBody>
-           <ThirdBody>
-                <Socials />     
-           </ThirdBody>
     </Container>    
     );
   }

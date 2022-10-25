@@ -6,12 +6,10 @@ import '../assets/fonts/Rijksmuseum-Bold.woff2';
 
 const Container = styled.div`
 display:flex;
-flex-direction: column;
+flex-direction: row;
 margin: 0 0 0 30%;
-
-img {
-    margin: 0.5% 25%;
-}
+border: 5px solid;
+padding:10px;
 
 h1 {
     text-decoration: none;
@@ -24,8 +22,8 @@ h1 {
 const Form = () => {
     return (    
      <Container>        
-                <img src={Location} alt="Girl in a jacket" width="100" height="120" />
-                <h1>Museumstraat 1,<br /> Amsterdam</h1>          
+                <h1>Museumstraat 1,<br /> Amsterdam</h1>
+                  
      </Container>
     );
 }
