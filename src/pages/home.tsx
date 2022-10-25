@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import apiCall from "../components/apiCall";
 import Navbar from "../components/navbar";
 import Search from "../components/searchEngine";
 import IntroCard from "../components/introCard";
