@@ -46,12 +46,12 @@ const SubmitButton = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-
-.button-54:active {
-  box-shadow: 0px 0px 0px 0px;
-  top: 5px;
-  left: 5px;
-}
+  
+  &:hover {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+    }
 
 `;
 

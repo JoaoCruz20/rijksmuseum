@@ -22,8 +22,7 @@ h1 {
 const Form = () => {
     return (    
      <Container>        
-                <h1>Museumstraat 1,<br /> Amsterdam</h1>
-                  
+                <h1>Museumstraat 1,<br /> Amsterdam</h1>                  
      </Container>
     );
 }
