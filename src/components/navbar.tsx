@@ -52,7 +52,7 @@ h1 {
   }
 
   li a:hover {
-    color: #3ca0e7;
+    color: #d80032;
   }
 
   li:hover {
