@@ -14,11 +14,11 @@ h1{
 }
 `;
 
-const Profile = (author:any, painting:any) => {
+const Profile = (params:any) => {
 
     const apiKey = 'XmkBt1Tj';
     const facetsWithImage = 8588;
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=Rembrandt+van+Rijn`;
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=${params}&title=${params}`;
 
     const [myArray, setMyArray] = useState([]);
     const [myObj, setMyObj] = useState({});
@@ -26,6 +26,7 @@ const Profile = (author:any, painting:any) => {
     const getMyData = async (url:string) => {
         const response = await fetch(url)
         const data = await response.json()
+        console.log(data);
         const names = data?.artObjects?.map((r:any) => r.title) 
 
         setMyArray(names)
@@ -40,10 +41,7 @@ const Profile = (author:any, painting:any) => {
 
     return (
         <Container>
-            <h1>{author}</h1>
-            <h1>{painting}</h1>
-            <h1>Hello World</h1>
-
+           <h1></h1>
         </Container>        
     );
 

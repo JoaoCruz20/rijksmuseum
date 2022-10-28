@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Form from "./form";
 import Location from "./location";
-import Socials from "./socialLinks";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
 

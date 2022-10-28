@@ -84,9 +84,7 @@ const IntroCard = () => {
 
     useEffect(() => {
      const pageresults = Randomizer(page);
-      setTimeout(getMyData,3000)
-      getMyData(url,pageresults);  
-           
+      getMyData(url,pageresults);            
     }, []);
 
     const Image = myArray[0];

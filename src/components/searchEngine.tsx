@@ -2,12 +2,20 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import Profile from "../pages/profile";
+import { Link } from "react-router-dom"
+
+
+interface artData {
+    title: string;
+
+  }
 
 const Container = styled.div`
 display:flex;
 flex-direction:column;
 border-style: solid;
 margin: 0 4% 2% 4%;
+padding: 10% 25% 10% 25%;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 h1{
@@ -83,32 +91,64 @@ const SubmitButton = styled.button`
     }
 `;
 
+const SearchResults = styled.div`
+margin: 2% 0 2% 0;
+`;
+
+const ReceivedSearch = styled.div`
+height: 100px;
+`;
+
+const NoResults = styled.div`
+`;
+
+
 const Search = () => {
 
     const apiKey = 'XmkBt1Tj';
     const facetsWithImage = 8588;
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&toppieces=true`;
+    let params ;
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&toppieces=true`
+    const searchurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=${params}&title=${params}`;
 
     const [myArray, setMyArray] = useState([]);
+    
     const [myObj, setMyObj] = useState({});
     const [search, setSearch] = useState('');
+    const [completedSearch, setCompletedSearch] = useState(true);
+    const [isReceived, setIsReceived] = useState(false);
+    const [researchTitles, setResearchTitles] = useState<Object>({});
+    const [researchNames, setResearchNames] = useState<Array<any>>([]);
     
     const getMyData = async (url:string) => {
         const response = await fetch(url)
         const data = await response.json()
-        const names = data?.artObjects?.map((r:any) => r.title) 
+        const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
 
         setMyArray(names)
         setMyObj(data)
-        console.log(myObj)
-    }
 
-    const SearchParams = (param:any) => {
+       const artData = data;
+
+        setResearchTitles(artData)
+        setResearchNames(names)
+    }
+  
+
+    const SearchParams = (param:string) => {
         console.log(param)
-        return <Profile></Profile>;
+        if(param == ""){
+        } else {
+            setCompletedSearch(false)
+            params = param;
+            setIsReceived(true);
+            getMyData(searchurl);
+        }
+    
     }
 
     const ButtonSearch = (e:any) => {
+        console.log(e);
         console.log(e.target.value)
     }
 
@@ -126,11 +166,24 @@ const Search = () => {
         <ButtonContainer>
             <SubmitButton  onClick={() => SearchParams(search)}>Submit</SubmitButton>
         </ButtonContainer>
-        <SuggestedSearchContainer>            
+       {completedSearch ? <SuggestedSearchContainer>            
             {myArray?.map((value,index) => (
                 <SuggestedSearch type="button" onClick={(e) => ButtonSearch(e)} key={`${index}-${value}`}>{value}</SuggestedSearch>
             ))}            
-        </SuggestedSearchContainer>
+        </SuggestedSearchContainer> : 
+        <SearchResults>
+            {isReceived ? <ReceivedSearch>
+             {researchNames?.map((value: any,index) => (                
+            <h1 key={`${index}-${value}`}>{value}</h1>
+            ))}      
+            </ReceivedSearch> :
+             <NoResults>
+                <h1>Not Received</h1>
+             </NoResults> }
+        </SearchResults> }
+
+         <ReceivedSearch></ReceivedSearch>
+    
      </Container>
     );
 }
