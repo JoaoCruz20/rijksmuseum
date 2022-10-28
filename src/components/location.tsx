@@ -1,14 +1,11 @@
-import React from "react";
 import styled from "styled-components";
-import Location from '../assets/icons/location.png';
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
 
 
 const Container = styled.div`
 display:flex;
 flex-direction: row;
-margin: 0 0 0 30%;
-border: 5px solid;
+margin: 0 0 0 20%;
 padding:10px;
 
 h1 {

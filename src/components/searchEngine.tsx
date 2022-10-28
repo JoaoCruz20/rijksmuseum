@@ -1,13 +1,10 @@
 /* eslint-disable no-restricted-globals */
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import Profile from "../pages/profile";
-import { Link } from "react-router-dom"
 
 
 interface artData {
     title: string;
-
   }
 
 const Container = styled.div`
@@ -106,7 +103,6 @@ const NoResults = styled.div`
 const Search = () => {
 
     const apiKey = 'XmkBt1Tj';
-    const facetsWithImage = 8588;
     let params ;
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&toppieces=true`
     const searchurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=${params}&title=${params}`;

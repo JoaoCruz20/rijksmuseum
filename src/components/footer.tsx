@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Form from "./form";
 import Location from "./location";
