@@ -12,3 +12,11 @@ Theme and colors were done. Now to features. I wanted art to visualized. So I we
 I wanted a intro feature, a navbar, the search bar and a carousel. Simple enough.
 
 Navbar was two buttons between the logo and centered in center. Simplified and using the picked colors.
+
+Intro feature is a simple message welcoming people and a button that could send you to another page with more info. Then I wanted to add a background for the feature. But what I did was that I added a random number through the Math.random method. It would always display a random piece of art from the museum api.
+
+The Search, I wanted to be a simple research to display the artists works. And so it was.  Although it created a few bugs.
+
+The carrousel is a sending a request for a random mage every 10sec.
+
+and then a simple input request for the name and email. And the address of the Museum.

@@ -1,5 +1,4 @@
-import { count } from "console";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 
