@@ -40,18 +40,6 @@ a {
   }
 `;
 
-const ThirdBody = styled.div`
-width:100%;
-
-padding: 20px 20px 0 0;
-
-p {    
-  color: white;
-  padding: 10px 10px 10px 10px;
-  font-size: 15px;
-  font-family: "Rijksmuseum-Normal", Times, serif;
-}
-`;
 
 const SeperationBar = styled.div`
 border-style: solid;
