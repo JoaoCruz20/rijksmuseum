@@ -124,7 +124,7 @@ const Search = () => {
         setMyArray(names)
         setMyObj(data)
 
-       const artData = data;
+       const artData = data;       
 
         setResearchTitles(artData)
         setResearchNames(names)
@@ -132,7 +132,6 @@ const Search = () => {
   
 
     const SearchParams = (param:string) => {
-        console.log(param)
         if(param == ""){
         } else {
             setCompletedSearch(false)

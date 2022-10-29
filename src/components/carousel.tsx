@@ -26,19 +26,18 @@ height: 100%;
 object-fit: cover;
 `;
 
+let timer:any = null;
+let finalImage:string = "";
 
-const Carousel= () => {
+const Carousel = () => {
 
     const apiKey = 'XmkBt1Tj';
-    let cnt = 0;
     
     const facetsWithImage = 8588;
-    let page = 1000 // cannot exceed 10000
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&imgonly=true&p=`;
-
-    const [myArray, setMyArray] = useState<any| null>([]);
+    let page:number = 1000 // cannot exceed 10000
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&format=json&imgonly=true&p=`;
+    
     const [myObj, setMyObj] = useState({});
-    const [finalImage, setFinalImage] =useState<string | any>('')
 
     const Randomizer = (page: number) => {
       const resultpage = (Math.random() * page);
@@ -51,35 +50,32 @@ const Carousel= () => {
 
         const response = await fetch(finalurl)
         const data = await response.json()
-        const urls = data?.artObjects?.map((r:any) => r.webImage.url) 
-        
-        setMyArray(urls)
-        setMyObj(data)    
+        const urls = data?.artObjects?.map((r:any) => r.webImage.url)
+
+        finalImage = countImages(urls)   
+        setMyObj(data)         
     }    
 
-    useEffect(() => {
-     const pageresults = Randomizer(page);
-      getMyData(url,pageresults);
-    }, []);
+  if(!timer) {
+    timer = setInterval(() => {
+        getMyData(url,Randomizer(page));
+    }, 10000)
+    console.log("setting timer")    
+}    
 
-    const timer = setInterval(() => setFinalImage(countImages(myArray)), 10000);
-
-    const countImages = (array: Array<string>) =>{              
+    const countImages = (array: Array<any>) =>{     
+            console.log(array.length)         
            let imageNumb = Math.round(Math.random() * array.length);
            let Image = array[imageNumb];
-           cnt++;
-            if(cnt === 4){
-                clearInterval(timer);
-                cnt = 0;
-            }
+            console.log(imageNumb);
            return Image;        
     }    
 
-
+    console.log(finalImage,"image");
     return (    
      <Container>
         <h1>Some of the Art</h1>        
-        <CarImage style={{backgroundImage:`url('${finalImage}')`}} />
+        <CarImage style={{backgroundImage:`url(${finalImage})`}} />
      </Container>
     );
 }
