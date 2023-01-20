@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 
@@ -28,15 +29,16 @@ li {
     }
 }
 
-a {    
-     padding: 20px 10px 10px 10px;
+button {    
+     padding: 20px 10px 7px 10px;
      font-size: 25px;
      font-family: "Rijksmuseum-Normal", Times, serif;
-      text-decoration: none;
+     text-decoration: none;
       
 
   &:hover {
       color: #3CA0E7;
+      cursor: pointer;
   }
   }
 
@@ -44,14 +46,19 @@ h1 {
     margin: 10px 10px 10px 10px;
     font-size: 40px;
     font-family: "Rijksmuseum-Normal", Times, serif;
+
+    &:hover {
+        transform: scale(1.05)
+    }
 }
 
-  li a {
+  li button {
     color: black;
   }
 
-  li a:hover {
+  li button:hover {
     color: #d80032;
+    cursor: pointer;
   }
 
   li:hover {
@@ -60,19 +67,33 @@ h1 {
 
 `;
 
+const LinkCss = {
+    textDecoration: "none",
+}
+
 const Navbar = () => {
 
+    const windowDown = (event:any) => {
+       let text = event?.target?.textContent
+       if(text === "Contact" && text !== undefined){
+            window.scroll({top:3000, left:0, behavior: "smooth"})
+       } else if (text === "Work" && text !== undefined){
+            window.scroll({top:1600, left:0, behavior: "smooth"})
+       }
+    }
+
     return(
+
         <Container>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Work</a></li>
-    <li>
-        <div>
-            <h1>Rijksmuseum</h1>
-        </div>
-    </li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
+            <li><Link to="/" style={LinkCss}><button>Home</button></Link></li>
+            <li><Link to="/" style={LinkCss}><button onClick={(e)=> windowDown(e)}>Work</button></Link></li>
+            <li>
+                <div>
+                    <h1>Rijksmuseum</h1>
+                </div>
+            </li>
+            <li><Link to="/about" style={LinkCss}><button>About</button></Link></li>
+            <li><Link to="/" style={LinkCss}><button onClick={(e)=> windowDown(e)}>Contact</button></Link></li>
         </Container>
     );
 }
