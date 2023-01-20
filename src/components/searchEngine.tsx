@@ -1,11 +1,7 @@
 /* eslint-disable no-restricted-globals */
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 
-
-interface artData {
-    title: string;
-  }
 
 const Container = styled.div`
 display:flex;
@@ -56,6 +52,10 @@ const SuggestedSearch = styled.button`
     color: #ffffff;
     margin:5px;
 
+    &:hover{
+       transform: scale(1.1)
+    }
+
 `;
 
 const ButtonContainer = styled.div`
@@ -100,70 +100,78 @@ const NoResults = styled.div`
 `;
 
 
+const fetcher = async (url:string) => { 
+    const response = await fetch(url)
+    const data = await response.json()
+    const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
+    return {names,data}
+}
+
+
 const Search = () => {
 
     const apiKey = 'XmkBt1Tj';
     let params ;
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&toppieces=true`
     const searchurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=${params}&title=${params}`;
+    const makerurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}`;
 
     const [myArray, setMyArray] = useState([]);
     
-    const [myObj, setMyObj] = useState({});
     const [search, setSearch] = useState('');
     const [completedSearch, setCompletedSearch] = useState(true);
     const [isReceived, setIsReceived] = useState(false);
-    const [researchTitles, setResearchTitles] = useState<Object>({});
     const [researchNames, setResearchNames] = useState<Array<any>>([]);
     
-    const getMyData = async (url:string) => {
-        const response = await fetch(url)
-        const data = await response.json()
-        const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
-
+    const firstDataFetcher = async (url:string) => {
+        let {names} = await fetcher(url)
         setMyArray(names)
-        setMyObj(data)
-
-       const artData = data;       
-
-        setResearchTitles(artData)
         setResearchNames(names)
-    }
-  
+    }  
 
-    const SearchParams = (param:string) => {
-        if(param == ""){
-        } else {
+    const resultDataFetcher = async (url:string, param:string) =>{
+        let finalurl = url + `&involvedMaker=${param}`
+        let {data} = await fetcher(finalurl)
+        console.log(data)
+        return data
+    }
+
+    const searchParams = (param:string) => {
+        console.log(param)
+        if(param && param !== undefined && param !== null){
             setCompletedSearch(false)
-            params = param;
             setIsReceived(true);
-            getMyData(searchurl);
-        }
-    
+            resultDataFetcher(makerurl, param);
+        }    
     }
 
-    const ButtonSearch = (e:any) => {
-        console.log(e);
-        console.log(e.target.value)
+    const buttonSearch = (e:any) => {
+      let search = e.target.textContent;
+      searchParams(search)    
+    }
+
+    const textSearch = (e:any) => {
+        let search = e.target.textContent;
+        searchParams(search)    
     }
 
     useEffect(() => {
-        getMyData(url);
-    }, []);
+        firstDataFetcher(url);
+    }, [url]);
 
 
     return (    
      <Container>        
-        <h1>Search engine</h1>
+        <h1>Search Engine</h1>
         <SearchInputContainer>
             <SearchInput value={search} onChange={(e) => setSearch(e.target.value)}/>
         </SearchInputContainer>
         <ButtonContainer>
-            <SubmitButton  onClick={() => SearchParams(search)}>Submit</SubmitButton>
+            <SubmitButton onClick={() => searchParams(search)}>Submit</SubmitButton>
         </ButtonContainer>
        {completedSearch ? <SuggestedSearchContainer>            
             {myArray?.map((value,index) => (
-                <SuggestedSearch type="button" onClick={(e) => ButtonSearch(e)} key={`${index}-${value}`}>{value}</SuggestedSearch>
+                <SuggestedSearch type="button" onClick={(e) => buttonSearch(e)} key={`${index}-${value}`}>{value}</SuggestedSearch>
             ))}            
         </SuggestedSearchContainer> : 
         <SearchResults>
