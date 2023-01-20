@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 
@@ -53,50 +54,55 @@ touch-action: manipulation;
   }
 `;
 
+const LinkStyle = {
+  textDecoration:"none",
+  color: "black"
+}
+
+
+const randomizer = (page: number) => {
+  let result = (Math.random() * page);
+  let resultpage = Math.round(result);
+  return resultpage;
+}
+
+const fetcher = async (finalurl:string) => { 
+  const response = await fetch(finalurl)
+  const data = await response.json()
+  const urls = data?.artObjects?.map((r:any) => r.webImage.url)
+  return urls
+ }
 
 
 const IntroCard = () => {
 
     const apiKey = 'XmkBt1Tj';
-    const facetsWithImage = 8588;
+    // facets with images 8588;
     let page = 1000 // cannot exceed 10000
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&imgonly=true&p=`;
-
-    const [myArray, setMyArray] = useState([]);
-    const [myObj, setMyObj] = useState({});
-
-    const Randomizer = (page: number) => {
-      const resultpage = (Math.random() * page);
-      let result = Math.round(resultpage);
-      return result;
-    }
+    const [myArray, setMyArray] = useState([]);  
     
     const getMyData = async (url:string, pageresults:number) => {  
         const finalurl = url + pageresults;
-
-        const response = await fetch(finalurl)
-        const data = await response.json()
-        const urls = data?.artObjects?.map((r:any) => r.webImage.url) 
-        
-        setMyArray(urls)
-        setMyObj(data)    
+        let imageUrls = await fetcher(finalurl)
+        setMyArray(imageUrls)
     }    
 
     useEffect(() => {
-     const pageresults = Randomizer(page);
+     const pageresults = randomizer(page);
       getMyData(url,pageresults);            
-    }, []);
+    }, [page,url]);
 
     const Image = myArray[0];
 
     return (    
      <Container style={{backgroundImage:`url('${Image}')`}}>
-        <div>
+      <div>
         <h1>Welcome to the Rijksmuseum</h1>
         <ButtonContainer>
-        <SubmitButton>Get to Know us</SubmitButton>
+          <SubmitButton><Link to="/about" style={LinkStyle}>Get to Know us</Link></SubmitButton>
         </ButtonContainer>
-       </div>
+      </div>
      </Container>
     );
 }
