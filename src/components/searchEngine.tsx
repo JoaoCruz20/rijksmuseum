@@ -1,6 +1,8 @@
 /* eslint-disable no-restricted-globals */
-import {useEffect, useState} from "react";
+import { Key, useEffect, useState} from "react";
 import styled from "styled-components";
+import fetcher from "../backend/fetcher";
+import { Link } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -93,55 +95,69 @@ margin: 2% 0 2% 0;
 `;
 
 const ReceivedSearch = styled.div`
-height: 100px;
+    height: 100%;
+    display: flex;
+    justify-content:center;
+    flex-direction:column;
+
+
+    div{
+
+    }
+
+    p{
+
+    }
+
+    h2{
+        margin:2%;
+    }
+
 `;
 
 const NoResults = styled.div`
+content: "No Results";
 `;
-
-
-const fetcher = async (url:string) => { 
-    const response = await fetch(url)
-    const data = await response.json()
-    const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
-    return {names,data}
-}
-
 
 const Search = () => {
 
     const apiKey = 'XmkBt1Tj';
-    let params ;
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&toppieces=true`
-    const searchurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=${params}&title=${params}`;
     const makerurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}`;
 
-    const [myArray, setMyArray] = useState([]);
-    
+    const [myArray, setMyArray] = useState([]);    
     const [search, setSearch] = useState('');
     const [completedSearch, setCompletedSearch] = useState(true);
     const [isReceived, setIsReceived] = useState(false);
-    const [researchNames, setResearchNames] = useState<Array<any>>([]);
+    const [researchData, setResearchData] = useState<any>();
     
     const firstDataFetcher = async (url:string) => {
-        let {names} = await fetcher(url)
+        let data = await fetcher(url)
+        const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
         setMyArray(names)
-        setResearchNames(names)
     }  
 
     const resultDataFetcher = async (url:string, param:string) =>{
-        let finalurl = url + `&involvedMaker=${param}`
-        let {data} = await fetcher(finalurl)
+        let makerurl = url + `&involvedMaker=${param}`
+        let data = await fetcher(makerurl)
+        if(data.count === 0){
+            let titleurl = url + `&title=${param}`
+            let data = await fetcher(titleurl)
+            if(data.count === 0){
+                setIsReceived(false);
+                return null
+            }
+        } 
         console.log(data)
         return data
     }
 
     const searchParams = (param:string) => {
-        console.log(param)
         if(param && param !== undefined && param !== null){
             setCompletedSearch(false)
             setIsReceived(true);
-            resultDataFetcher(makerurl, param);
+           let data = resultDataFetcher(makerurl, param);
+           data.then((data)=> setResearchData(data))
         }    
     }
 
@@ -167,26 +183,33 @@ const Search = () => {
             <SearchInput value={search} onChange={(e) => setSearch(e.target.value)}/>
         </SearchInputContainer>
         <ButtonContainer>
-            <SubmitButton onClick={() => searchParams(search)}>Submit</SubmitButton>
+            <SubmitButton onClick={() => textSearch(search)}>Submit</SubmitButton>
         </ButtonContainer>
        {completedSearch ? <SuggestedSearchContainer>            
             {myArray?.map((value,index) => (
                 <SuggestedSearch type="button" onClick={(e) => buttonSearch(e)} key={`${index}-${value}`}>{value}</SuggestedSearch>
             ))}            
         </SuggestedSearchContainer> : 
-        <SearchResults>
+        <SearchResults>               
+                    <h3>Count: {researchData?.count}</h3>
             {isReceived ? <ReceivedSearch>
-             {researchNames?.map((value: any,index) => (                
-            <h1 key={`${index}-${value}`}>{value}</h1>
-            ))}      
+                {researchData?.artObjects?.map((value: any,index: Key | null | undefined) => (
+                        <>
+                        <h2 key={index}>{value?.title}</h2>
+                        <Link to={{
+                            pathname:"/search",
+                            hash: `${index}`
+                        }} state={{
+                            data: value
+                        }}>
+                            Link</Link>
+                        </>
+            ))} 
             </ReceivedSearch> :
              <NoResults>
                 <h1>Not Received</h1>
              </NoResults> }
-        </SearchResults> }
-
-         <ReceivedSearch></ReceivedSearch>
-    
+        </SearchResults> }    
      </Container>
     );
 }
