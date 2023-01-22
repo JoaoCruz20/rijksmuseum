@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useState} from "react";
 import Navbar from "../components/navbar";
 import Search from "../components/searchEngine";
 import IntroCard from "../components/introCard";
@@ -7,6 +7,8 @@ import Footer from "../components/footer";
 
 const Home = () => {
 
+    const[loading, setLoading] = useState(true);
+
     return (
         <div>
             <Navbar />
@@ -14,7 +16,7 @@ const Home = () => {
             <Search />            
             <Carousel />
             <Footer />
-        </div>
+        </div> 
     );
   }
   
