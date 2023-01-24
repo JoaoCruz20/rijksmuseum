@@ -148,7 +148,6 @@ const Search = () => {
                 return null
             }
         } 
-        console.log(data)
         return data
     }
 
@@ -166,8 +165,8 @@ const Search = () => {
       searchParams(search)    
     }
 
-    const textSearch = (e:any) => {
-        let search = e.target.textContent;
+    const textSearch = (search:string) => {
+        console.log(search)
         searchParams(search)    
     }
 
@@ -180,7 +179,7 @@ const Search = () => {
      <Container>        
         <h1>Search Engine</h1>
         <SearchInputContainer>
-            <SearchInput value={search} onChange={(e) => setSearch(e.target.value)}/>
+            <SearchInput value={search} onChange={()=> textSearch}/>
         </SearchInputContainer>
         <ButtonContainer>
             <SubmitButton onClick={() => textSearch(search)}>Submit</SubmitButton>

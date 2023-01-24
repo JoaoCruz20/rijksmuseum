@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {useEffect, useState} from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
+import fetcher from "../backend/fetcher";
 
 const Container = styled.div`
 display:flex;
@@ -18,6 +20,10 @@ h1 {
     left:0;
 }
 
+span {
+  font-size: 16px;
+}
+
 `;
 
 const CarImage = styled.img`
@@ -26,55 +32,47 @@ height: 100%;
 object-fit: cover;
 `;
 
-let timer:any = null;
-let finalImage:string = "";
+const Randomizer = (page: number) => {
+  let resultpage = (Math.random() * page);
+  let result = Math.round(resultpage);
+  return result;
+}
+
+const countImages = (array: Array<any>) =>{            
+  let imageNumb = Math.round(Math.random() * array.length);
+  let Image = array[imageNumb];
+  return Image;        
+}  
+
+let timer
+let finalimage
 
 const Carousel = () => {
 
-    const apiKey = 'XmkBt1Tj';
-    
-    const facetsWithImage = 8588;
+    const apiKey = 'XmkBt1Tj';    
     let page:number = 1000 // cannot exceed 10000
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&format=json&imgonly=true&p=`;
-    
-    const [myObj, setMyObj] = useState({});
+    let [finalImage, setFinalImage] = useState(``)
 
-    const Randomizer = (page: number) => {
-      const resultpage = (Math.random() * page);
-      let result = Math.round(resultpage);
-      return result;
-    }
     
     const getMyData = async (url:string, pageresults:number) => {  
-        const finalurl = url + pageresults;
-
-        const response = await fetch(finalurl)
-        const data = await response.json()
-        const urls = data?.artObjects?.map((r:any) => r.webImage.url)
-
-        finalImage = countImages(urls)   
-        setMyObj(data)         
-    }    
-
-  if(!timer) {
-    timer = setInterval(() => {
+        let finalurl = url + pageresults;
+        let data = await fetcher(finalurl);
+        let urls = data?.artObjects?.map((r:any) => r.webImage.url)          
+        let image = countImages(urls);
+        setFinalImage(image);       
+    }  
+    
+    useEffect(() => {
+      setInterval(() => {
         getMyData(url,Randomizer(page));
-    }, 10000)
-    console.log("setting timer")    
-}    
+    }, 100000)
+      });    
 
-    const countImages = (array: Array<any>) =>{     
-            console.log(array.length)         
-           let imageNumb = Math.round(Math.random() * array.length);
-           let Image = array[imageNumb];
-            console.log(imageNumb);
-           return Image;        
-    }    
 
-    console.log(finalImage,"image");
     return (    
      <Container>
-        <h1>Some of the Art</h1>        
+        <h1>Some of the Art <span>New one every 100s</span></h1>              
         <CarImage style={{backgroundImage:`url(${finalImage})`}} />
      </Container>
     );

@@ -5,8 +5,7 @@ import '../assets/fonts/Rijksmuseum-Bold.woff2';
 const Container = styled.div`
 display:flex;
 flex-direction: row;
-margin: 0 0 0 20%;
-padding:10px;
+justify-content:flex-end;
 
 h1 {
     text-decoration: none;

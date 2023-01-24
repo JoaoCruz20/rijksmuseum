@@ -5,6 +5,7 @@ import '../assets/fonts/Rijksmuseum-Normal.woff2';
 const Container = styled.div`
 display:flex;
 flex-direction: column;
+width:100%;
 `;
 
 const InputContainer = styled.div`
@@ -12,6 +13,7 @@ display:flex;
 flex-direction: row;
 
 input {
+  display:flex;
   margin: 0 2% 3% 0;
   padding: 5px;
   font-size: 16px;
@@ -26,6 +28,7 @@ input {
 
 const ButtonContainer = styled.div`
 display:flex;
+flex-direction: row;
 
 `;
 
@@ -55,11 +58,16 @@ const SubmitButton = styled.button`
 `;
 
 const Form = () => {
+
+  const Nothing = (e:any) => {
+    console.log("nothing")
+  }
+
     return (    
      <Container>  
         <InputContainer>    
-            <input value="Name" type="text" id="Name" name="Name" />            
-            <input value="Email" type="email" id="email" name="email" />
+            <input value="Name" onChange={(e)=>Nothing(e)} type="text" id="Name" name="Name" />            
+            <input value="Email" onChange={(e)=>Nothing(e)} type="email" id="email" name="email" />
         </InputContainer>  
             <ButtonContainer>
                 	<SubmitButton>Submit</SubmitButton>
