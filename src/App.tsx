@@ -13,18 +13,10 @@ function App() {
   return (
     <Router> 
       <Routes>
-        <Route caseSensitive={false} path="/"  element={<Home />}>
-          <Home />
-        </Route>
-        <Route caseSensitive={false} path="/profile" element={<Profile />}>
-          <Profile />
-        </Route>
-        <Route caseSensitive={false} path="/search" element={<SearchPage />}>
-          <SearchPage />
-        </Route>
-        <Route caseSensitive={false} path="/about" element={<About />} >
-          <About />
-        </Route>
+        <Route caseSensitive={false} path="/rijksmuseum"  element={<Home />} />
+        <Route caseSensitive={false} path="/profile" element={<Profile />} />
+        <Route caseSensitive={false} path="/search" element={<SearchPage />} />
+        <Route caseSensitive={false} path="/about" element={<About />} />
       </Routes>     
     </Router>
   );
