@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
@@ -73,8 +74,8 @@ const LinkCss = {
 
 const Navbar = () => {
 
-    const windowDown = (event:any) => {
-       let text = event?.target?.textContent
+    const windowDown = (e:any) => {
+       let text = e?.target?.textContent
        if(text === "Contact" && text !== undefined){
             window.scroll({top:3000, left:0, behavior: "smooth"})
        } else if (text === "Work" && text !== undefined){
@@ -85,7 +86,7 @@ const Navbar = () => {
     return(
 
         <Container>
-            <li><Link to="/" style={LinkCss}><button>Home</button></Link></li>
+            <li><Link to="/rijksmuseum" style={LinkCss}><button>Home</button></Link></li>
             <li><Link to="/" style={LinkCss}><button onClick={(e)=> windowDown(e)}>Work</button></Link></li>
             <li>
                 <div>

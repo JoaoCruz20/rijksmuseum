@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {useEffect, useState} from "react";
+import React ,{useEffect, useState} from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import fetcher from "../backend/fetcher";
+import globalApi from "../global";
+import Randomizer from "../backend/randomizer";
 
 const Container = styled.div`
 display:flex;
@@ -32,11 +34,6 @@ height: 100%;
 object-fit: cover;
 `;
 
-const Randomizer = (page: number) => {
-  let resultpage = (Math.random() * page);
-  let result = Math.round(resultpage);
-  return result;
-}
 
 const countImages = (array: Array<any>) =>{            
   let imageNumb = Math.round(Math.random() * array.length);
@@ -44,16 +41,11 @@ const countImages = (array: Array<any>) =>{
   return Image;        
 }  
 
-let timer
-let finalimage
 
 const Carousel = () => {
 
-    const apiKey = 'XmkBt1Tj';    
-    let page:number = 1000 // cannot exceed 10000
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&format=json&imgonly=true&p=`;
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${globalApi}&format=json&imgonly=true&p=`;
     let [finalImage, setFinalImage] = useState(``)
-
     
     const getMyData = async (url:string, pageresults:number) => {  
         let finalurl = url + pageresults;
@@ -65,7 +57,7 @@ const Carousel = () => {
     
     useEffect(() => {
       setInterval(() => {
-        getMyData(url,Randomizer(page));
+        getMyData(url,Randomizer(1000));
     }, 100000)
       });    
 

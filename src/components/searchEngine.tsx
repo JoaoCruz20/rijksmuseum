@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
-import { Key, useEffect, useState} from "react";
+import React, { Key, useEffect, useState} from "react";
 import styled from "styled-components";
 import fetcher from "../backend/fetcher";
 import { Link } from "react-router-dom";
+import globalApi from "../global";
 
 
 const Container = styled.div`
@@ -119,11 +120,10 @@ const NoResults = styled.div`
 content: "No Results";
 `;
 
-const Search = () => {
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${globalApi}&toppieces=true`
+    const makerurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${globalApi}`;
 
-    const apiKey = 'XmkBt1Tj';
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&toppieces=true`
-    const makerurl = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}`;
+const Search = () => {
 
     const [myArray, setMyArray] = useState([]);    
     const [search, setSearch] = useState('');
@@ -133,8 +133,10 @@ const Search = () => {
     
     const firstDataFetcher = async (url:string) => {
         let data = await fetcher(url)
+        // if anoniem do not repeat, make logic about that
         const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
         setMyArray(names)
+        console.log(data)
     }  
 
     const resultDataFetcher = async (url:string, param:string) =>{
@@ -174,15 +176,26 @@ const Search = () => {
         firstDataFetcher(url);
     }, [url]);
 
+    const handleChange = (e:any) => {
+        setSearch(e.target.value);
+    };
+
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        console.log(search)
+    };
+
 
     return (    
      <Container>        
         <h1>Search Engine</h1>
         <SearchInputContainer>
-            <SearchInput value={search} onChange={()=> textSearch}/>
+            <form onSubmit={handleSubmit}>
+            <SearchInput value={search} onChange={(e)=> handleChange(e)}/>
+            </form>
         </SearchInputContainer>
         <ButtonContainer>
-            <SubmitButton onClick={() => textSearch(search)}>Submit</SubmitButton>
+            <SubmitButton type="submit" onClick={handleSubmit}>Submit</SubmitButton>
         </ButtonContainer>
        {completedSearch ? <SuggestedSearchContainer>            
             {myArray?.map((value,index) => (

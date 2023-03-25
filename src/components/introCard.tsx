@@ -1,7 +1,9 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
+import globalApi from "../global";
+import Randomizer from "../backend/randomizer";
 
 const Container = styled.div`
 display:flex;
@@ -60,12 +62,6 @@ const LinkStyle = {
 }
 
 
-const randomizer = (page: number) => {
-  let result = (Math.random() * page);
-  let resultpage = Math.round(result);
-  return resultpage;
-}
-
 const fetcher = async (finalurl:string) => { 
   const response = await fetch(finalurl)
   const data = await response.json()
@@ -76,10 +72,7 @@ const fetcher = async (finalurl:string) => {
 
 const IntroCard = () => {
 
-    const apiKey = 'XmkBt1Tj';
-    // facets with images 8588;
-    let page = 1000 // cannot exceed 10000
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&imgonly=true&p=`;
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${globalApi}&imgonly=true&p=`;
     const [myArray, setMyArray] = useState([]);  
     
     const getMyData = async (url:string, pageresults:number) => {  
@@ -89,9 +82,8 @@ const IntroCard = () => {
     }    
 
     useEffect(() => {
-     const pageresults = randomizer(page);
-      getMyData(url,pageresults);            
-    }, [page,url]);
+      getMyData(url,Randomizer(1000));            
+    }, [url]);
 
     const Image = myArray[0];
 

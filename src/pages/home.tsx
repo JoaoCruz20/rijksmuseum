@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import Navbar from "../components/navbar";
 import Search from "../components/searchEngine";
 import IntroCard from "../components/introCard";
