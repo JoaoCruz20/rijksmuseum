@@ -52,14 +52,15 @@ const Carousel = () => {
         let data = await fetcher(finalurl);
         let urls = data?.artObjects?.map((r:any) => r.webImage.url)          
         let image = countImages(urls);
-        setFinalImage(image);       
+        setFinalImage(image);      
     }  
     
     useEffect(() => {
-      setInterval(() => {
+      const timeout = setInterval(() => {
         getMyData(url,Randomizer(1000));
-    }, 100000)
-      });    
+      },15000)
+      return () => clearInterval(timeout)
+    },[url]);    
 
 
     return (    
