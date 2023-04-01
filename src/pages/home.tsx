@@ -7,8 +7,6 @@ import Footer from "../components/footer";
 
 const Home = () => {
 
-    const[loading, setLoading] = useState(true);
-
     return (
         <div>
             <Navbar />

@@ -174,7 +174,7 @@ const Search = () => {
 
     useEffect(() => {
         firstDataFetcher(url);
-    }, [url]);
+    }, []);
 
     const handleChange = (e:any) => {
         setSearch(e.target.value);

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
 

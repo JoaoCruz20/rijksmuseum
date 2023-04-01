@@ -47,10 +47,9 @@ const Carousel = () => {
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${globalApi}&format=json&imgonly=true&p=`;
     let [finalImage, setFinalImage] = useState(``)
     
-    const getMyData = async (url:string, pageresults:number) => {  
-        let finalurl = url + pageresults;
-        let data = await fetcher(finalurl);
-        let urls = data?.artObjects?.map((r:any) => r.webImage.url)          
+    const getMyData = async (url:string, pageresults:number) => {
+        let data = await fetcher(url + pageresults);
+        let urls = data?.artObjects?.map((r:{webImage:{url:string}}) => r.webImage.url)          
         let image = countImages(urls);
         setFinalImage(image);      
     }  
