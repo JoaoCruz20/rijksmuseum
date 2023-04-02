@@ -1,0 +1,41 @@
+This is what to do to finish the project itself has it is required
+
+Refactor with adding the types and Interfaces through the pages.
+Refactor the names to better Description
+
+Follow the SOLID principles (only follows TS).
+SRP//
+BreakDown the TSX to smaller pieces
+Fetch/apiCaller breakdown into a different file that is individual
+Functions that don't need to be in main file, put in another file So it doesn't have to be in main React Function(similar to the Fetcher)
+//OCP
+Simply and try not to repeat the same component/logic
+//LSP
+?
+//ISP
+Interface the Props of each components and logic.
+User shouldn't depend on Components that they do not use
+Simplify, especially in references of values
+//DIP
+Make Components extende instead of completely changed to avoid problems.
+
+// to improve performance memo the React Components
+// use useCallback and useMemo
+// dynamic import?
+// lazy loading
+// Web Workers
+
+
+DONE -> TransForm certaing values such has the APIkey into global variables. -> API key has been made a global
+-> The randomizer function has been made into a external function that is being reused. -> now the fetch function needs to be done
+Add npm package to make values anonymous so that no one can see it. -> make env method and create mask in github
+Finish/fix the Carrousel component so that it properly works (useMemo) -> has been made more efficient with SetInterval done properly -> make sure that if no image is displayed a default one is
+Refactor the Search Engine using the SOLID principles and useReducer for the SearchForm
+Finish the Search Engine with the Search input
+Redo Footer -> Make the Form actually send an email
+Fix NavBar, It breaks if in a different page
+Make it 100% mobile viable
+
+//Later
+-> add a bot component that will help
+-> Refactor any CSS and use better dynamic CSS
