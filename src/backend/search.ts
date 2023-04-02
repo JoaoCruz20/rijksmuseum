@@ -1,17 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 class Search {
-    data: any;
-    constructor(){
-        this.data 
-    }
-
-    searchButton(){
-
+    public search
+    constructor(search: string){
+        this.search = search
     }
 
     searchInput(){
-        
+        let answer = fetch(this.search);
+        return answer
     }
 }
 
-export default Search
+export default Search;

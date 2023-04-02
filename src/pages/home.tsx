@@ -6,7 +6,7 @@ import Carousel from "../components/carousel";
 import Footer from "../components/footer";
 
 const Home = () => {
-
+    
     return (
         <div>
             <Navbar />
