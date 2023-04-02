@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
 import styled from "styled-components";
-import Form from "./form";
-import Location from "./location";
+import Form from "./Form";
+import Location from "./Location";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
 

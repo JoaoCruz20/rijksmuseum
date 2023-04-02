@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React ,{useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import fetcher from "../backend/fetcher";

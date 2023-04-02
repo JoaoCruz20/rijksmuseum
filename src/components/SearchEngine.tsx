@@ -125,7 +125,6 @@ const Search = () => {
         // if anoniem do not repeat, make logic about that
         const names = data?.artObjects?.map((r:any) => r.principalOrFirstMaker)
         setMyArray(names)
-        console.log(data)
     }  
 
     const resultDataFetcher = async (url:string, param:string) =>{

@@ -1,9 +1,8 @@
-import React, {useState} from "react";
-import Navbar from "../components/navbar";
-import Search from "../components/searchEngine";
-import IntroCard from "../components/introCard";
-import Carousel from "../components/carousel";
-import Footer from "../components/footer";
+import Navbar from "../components/Navbar";
+import Search from "../components/SearchEngine";
+import IntroCard from "../components/IntroCard";
+import Carousel from "../components/Carousel";
+import Footer from "../components/Footer";
 
 const Home = () => {
     

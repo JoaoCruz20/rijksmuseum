@@ -16,9 +16,8 @@ h1{
 
 const Profile = (params:any) => {
 
-    const apiKey = 'XmkBt1Tj';
-    const facetsWithImage = 8588;
-    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${apiKey}&involvedMaker=${params}&title=${params}`;
+
+    const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}&involvedMaker=${params}&title=${params}`;
 
     const [myArray, setMyArray] = useState([]);
     const [myObj, setMyObj] = useState({});
@@ -26,12 +25,10 @@ const Profile = (params:any) => {
     const getMyData = async (url:string) => {
         const response = await fetch(url)
         const data = await response.json()
-        console.log(data);
         const names = data?.artObjects?.map((r:any) => r.title) 
 
         setMyArray(names)
         setMyObj(data)
-        console.log(myObj)
     }
 
     useEffect(() => {
