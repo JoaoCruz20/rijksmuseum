@@ -4,7 +4,7 @@ import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import Randomizer from "../backend/randomizer";
 
-const Container = styled.div`
+const Container = styled.header`
 display:flex;
 justify-content: center;
 height:500px;
