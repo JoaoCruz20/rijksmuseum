@@ -32,10 +32,10 @@ DONE -> Add npm package to make values anonymous so that no one can see it. -> m
 Finish/fix the Carrousel component so that it properly works (useMemo) -> has been made more efficient with SetInterval done properly -> make sure that if no image is displayed a default one is
 Refactor the Search Engine using the SOLID principles and useReducer for the SearchForm
 Finish the Search Engine with the Search input
-Redo Footer -> Make the Form actually send an email
+DONE -> Redo Footer -> Make the Form actually send an email -> I am fixing the everything but the input doesn't send anything
 DONE -> Fix NavBar, It breaks if in a different page -> Removed Link in two of the Buttons
-Make it 100% mobile viable
-Fix the Welcome to the Rijksmuseum h1 tag and Buttons/Inputs
+DONE -> Make it 100% mobile viable
+Fix the Welcome to the Rijksmuseum h1 tag and Buttons/Inputs -> buttons done
 
 //Later
 -> add a bot component that will help
