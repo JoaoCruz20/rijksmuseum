@@ -48,7 +48,7 @@ li {
 }
 
 button {    
-     padding: 20px 0 0 0;
+     padding: 20px 10px 7px 10px;
      font-size: 25px;
      font-family: "Rijksmuseum-Normal", Times, serif;
      text-decoration: none;
