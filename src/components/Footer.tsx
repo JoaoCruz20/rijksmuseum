@@ -28,9 +28,18 @@ h1 {
     letter-spacing: 2px;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 10px 10px 10px 10px;
+    padding: 10px 10px 0px 10px;
     font-family: "Rijksmuseum-Bold", Times, serif;
  }
+
+ h4 {    
+  display:flex;
+  justify-content:center;
+  letter-spacing: 2px;
+  text-decoration: none;
+  padding: 0px 10px 0px 10px;
+  font-family: "Rijksmuseum-Bold", Times, serif;
+}
 `;
 
 const SecondBody = styled.div` 
@@ -51,6 +60,7 @@ const Footer = () => {
      <Container>
            <FirstBody>         
                   <h1>Get To Know Us Everyday</h1>
+                  <h4>Subscribe to our Newsletter</h4>
                   <Form />               
            </FirstBody>      
            <SecondBody>        

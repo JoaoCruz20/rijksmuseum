@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
-import { useState } from "react";
+import { useReducer, useState } from "react";
+import { ActionFunction } from "react-router-dom";
+import { Action } from "@remix-run/router";
 
 const Container = styled.div`
 width:100%;
@@ -55,34 +57,41 @@ const SubmitButton = styled.button`
 
 `;
 
+function reducer(state:any, action:any){
+  if(action.type === "set_name"){
+    return {
+      name: action.nextName,
+      email: state.email
+    }
+  } else if (action.type === "set_email"){
+    return {
+      name: state.name,
+      email: action.nextEmail
+    }
+  } else {
+    throw new Error("Reducer error");
+  }
+}
+
 const Form = () => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+ const [state, dispatch] = useReducer(reducer, {name: "", email: ""}) 
 
-  const Nothing = (e:any) => {
-    console.log("nothing")
-  }
-
-  const handleName = (e:any) => {
-    setName(e.target.value)
-  }
-
-  const handleEmail = (e:any) => {
-    setEmail(e.target.value)
-  }
-
-  const onSubmit= (e:any) => {
-    e.preventDefault()
+  const onSubmit= () => {
+    if(state.name !== "" && state.email !== ""){
+      window.location.href = `mailto:user@example.com?subject=${state?.name}'s NewsLetter&body=message%20goes%20here`
+    }else {
+      window.location.href = `mailto:user@example.com?subject=Subject&body=message%20goes%20here`
+    }    
   }
 
     return (    
      <Container>  
         <InputContainer onSubmit={onSubmit}>    
-            <input value={name} placeholder="Name" onChange={(e)=> handleName(e)} type="text" id="Name" name="Name" />            
-            <input value={email} placeholder="Email" onChange={(e)=> handleEmail(e)} type="email" id="email" name="email" />
+            <input value={state?.name} placeholder="Name" onChange={(e)=> dispatch({type: 'set_name', nextName: e.target.value})} type="text" id="Name" name="Name" />            
+            <input value={state?.email} placeholder="Email" onChange={(e)=> dispatch({type: 'set_email', nextEmail: e.target.value})} type="email" id="email" name="email" />
         </InputContainer>  
         <ButtonContainer>
-            <SubmitButton onClick= {(e)=> onSubmit(e)}>Submit</SubmitButton>
+            <SubmitButton onClick= {()=> onSubmit()}>Submit</SubmitButton>
         </ButtonContainer>
      </Container>
     );

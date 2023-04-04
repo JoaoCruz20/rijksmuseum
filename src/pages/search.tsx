@@ -29,7 +29,7 @@ object-fit: cover;
 const DataContainer = styled.div`
 display:flex;
 flex-direction:column;
-width:60%;
+width:50%;
 border-style: solid;
 margin: 1% 1% 2% 1%;
 padding: 2%;

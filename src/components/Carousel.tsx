@@ -59,7 +59,7 @@ const Carousel = () => {
 
     return (    
      <Container>
-        <h1>Some of the Art <span>New one every 100s</span></h1>              
+        <h1>Some of the Art <span>New one every 15s</span></h1>              
         <CarImage style={{backgroundImage:`url(${finalImage})`}} />
      </Container>
     );

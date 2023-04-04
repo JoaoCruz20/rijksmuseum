@@ -81,12 +81,11 @@ const SubmitButton = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-
-  &:hover {
+  &:active {
     box-shadow: 0px 0px 0px 0px;
     top: 5px;
     left: 5px;
-    }
+  }  
 `;
 
 const SearchResults = styled.div`
