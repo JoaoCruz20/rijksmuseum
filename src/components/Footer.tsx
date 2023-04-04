@@ -5,10 +5,10 @@ import Location from "./Location";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
 
-const Container = styled.div`
+const Container = styled.footer`
 display:flex;
-flex-direction:row;
-justify-content:space-between;
+flex-direction:column;
+justify-content:center;
 flex-wrap: wrap;
 border-style: solid;
 margin: 0 4% 1% 4%;
@@ -20,10 +20,11 @@ const FirstBody = styled.div`
 display:flex;
 flex-direction: column;
 justify-content:center;
-margin: 2% 2% 2% 2%;
-padding: 0 0 1% 0;
+margin: 2% 2% 1% 2%;
 
 h1 {    
+    display:flex;
+    justify-content:center;
     letter-spacing: 2px;
     text-decoration: none;
     text-transform: uppercase;
@@ -36,7 +37,7 @@ const SecondBody = styled.div`
 display: flex;
 justify-content:flex-end;
 justify-content:center;
-margin: 2%;
+margin: 1% 2% 1% 2%;
 a {    
      color: #acacacff;
      padding: 10px 10px 10px 10px;

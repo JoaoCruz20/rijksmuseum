@@ -2,16 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
 
-
 const Container = styled.div`
 display:flex;
-flex-direction: row;
 justify-content:flex-end;
-
-h1 {
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 10px 10px 10px 10px;
+h2 {
+    text-decoration: underline;
     font-family: "Rijksmuseum-Bold", Times, serif;
 }
 `;
@@ -19,9 +14,8 @@ h1 {
 const Form = () => {
     return (    
      <Container>        
-                <h1>Museumstraat 1,<br /> Amsterdam</h1>                  
+                <h2>Museumstraat 1, Amsterdam</h2>                  
      </Container>
     );
 }
-
 export default Form;
