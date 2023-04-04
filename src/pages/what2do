@@ -27,15 +27,17 @@ Make Components extende instead of completely changed to avoid problems.
 
 
 DONE -> TransForm certaing values such has the APIkey into global variables. -> API key has been made a global
--> The randomizer function has been made into a external function that is being reused. -> now the fetch function needs to be done
-Add npm package to make values anonymous so that no one can see it. -> make env method and create mask in github
+DONE -> The randomizer function has been made into a external function that is being reused. -> now the fetch function needs to be done
+DONE -> Add npm package to make values anonymous so that no one can see it. -> make env method and create mask in github -> there are no Masks in Github and .ENV should be in Middleware
 Finish/fix the Carrousel component so that it properly works (useMemo) -> has been made more efficient with SetInterval done properly -> make sure that if no image is displayed a default one is
 Refactor the Search Engine using the SOLID principles and useReducer for the SearchForm
 Finish the Search Engine with the Search input
 Redo Footer -> Make the Form actually send an email
-Fix NavBar, It breaks if in a different page
+DONE -> Fix NavBar, It breaks if in a different page -> Removed Link in two of the Buttons
 Make it 100% mobile viable
+Fix the Welcome to the Rijksmuseum h1 tag and Buttons/Inputs
 
 //Later
 -> add a bot component that will help
 -> Refactor any CSS and use better dynamic CSS
+-> read the background color and change text based on that

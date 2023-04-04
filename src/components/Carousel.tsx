@@ -33,16 +33,13 @@ height: 100%;
 object-fit: cover;
 `;
 
-
 const countImages = (array: Array<any>) =>{            
   let imageNumb = Math.round(Math.random() * array.length);
   let Image = array[imageNumb];
   return Image;        
 }  
 
-
 const Carousel = () => {
-
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}&format=json&imgonly=true&p=`;
     let [finalImage, setFinalImage] = useState(``)
     
@@ -59,7 +56,6 @@ const Carousel = () => {
       },15000)
       return () => clearInterval(timeout)
     },[url]);    
-
 
     return (    
      <Container>
