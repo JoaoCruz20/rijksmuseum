@@ -1,17 +1,22 @@
 {
   "files": {
     "main.css": "/rijksmuseum/static/css/main.073c9b0a.css",
-    "main.js": "/rijksmuseum/static/js/main.a6285023.js",
+    "main.js": "/rijksmuseum/static/js/main.1dfa36db.js",
+    "static/js/502.bbb6d8d5.chunk.js": "/rijksmuseum/static/js/502.bbb6d8d5.chunk.js",
     "static/js/787.b6221acb.chunk.js": "/rijksmuseum/static/js/787.b6221acb.chunk.js",
+    "static/media/rijkmuseum.png": "/rijksmuseum/static/media/rijkmuseum.ffd0c5da400445d3d4f4.png",
     "static/media/Rijksmuseum-Normal.woff2": "/rijksmuseum/static/media/Rijksmuseum-Normal.b0c7bdcae73b9fcbdb43.woff2",
     "static/media/Rijksmuseum-Bold.woff2": "/rijksmuseum/static/media/Rijksmuseum-Bold.e9c7cea918ead57d9e21.woff2",
     "index.html": "/rijksmuseum/index.html",
+    "static/media/burger-menu.svg": "/rijksmuseum/static/media/burger-menu.a0250e0ba0f8de521f2f2a550cbb6502.svg",
+    "static/media/icon-arrow.svg": "/rijksmuseum/static/media/icon-arrow.51bf723ca3f11d8480edee94c0d9569b.svg",
     "main.073c9b0a.css.map": "/rijksmuseum/static/css/main.073c9b0a.css.map",
-    "main.a6285023.js.map": "/rijksmuseum/static/js/main.a6285023.js.map",
+    "main.1dfa36db.js.map": "/rijksmuseum/static/js/main.1dfa36db.js.map",
+    "502.bbb6d8d5.chunk.js.map": "/rijksmuseum/static/js/502.bbb6d8d5.chunk.js.map",
     "787.b6221acb.chunk.js.map": "/rijksmuseum/static/js/787.b6221acb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.a6285023.js"
+    "static/js/main.1dfa36db.js"
   ]
 }
