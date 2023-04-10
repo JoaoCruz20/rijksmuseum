@@ -3,7 +3,6 @@ import React, { Key, useEffect, useState} from "react";
 import styled from "styled-components";
 import fetcher from "../backend/fetcher";
 import { Link } from "react-router-dom";
-import { resolve } from "path";
 
 const Container = styled.div`
 display:flex;
@@ -216,8 +215,6 @@ const Search = () => {
         return () => clearTimeout(timeout)
     }
     }, [search])
-
-    console.log(researchData)
 
     return (    
      <Container>        

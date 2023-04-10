@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import fetcher from "../backend/fetcher";
@@ -41,21 +41,21 @@ const countImages = (array: Array<any>) =>{
 
 const Carousel = () => {
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}&format=json&imgonly=true&p=`;
-    let [finalImage, setFinalImage] = useState(``)
+    let [finalImage, setFinalImage] = useState(`"https://lh5.ggpht.com/t49LlWtTHKCTZ5QjEZmZaa7NKXZr4-bK4fMI0EMrcKoOJZ8Y3sBVbzrvCEjJw4R9rLJPRMNBWwiPJi95yzb70FvCBw=s0"`)
     
-    const getMyData = async (url:string, pageresults:number) => {
-        let data = await fetcher(url + pageresults);
-        let urls = data?.artObjects?.map((r:{webImage:{url:string}}) => r.webImage.url)          
+    const getMyData = useMemo(() => async (url:string, pageresults:number) => {
+        let data = await fetcher(url + pageresults, "call");
+        let urls = data?.artObjects?.map((r:{webImage:{url:string}}) => r?.webImage?.url)          
         let image = countImages(urls);
         setFinalImage(image);      
-    }  
+    }, [])  
     
     useEffect(() => {
       const timeout = setInterval(() => {
         getMyData(url,Randomizer(1000));
       },15000)
       return () => clearInterval(timeout)
-    },[url]);    
+    },[getMyData, url]);    
 
     return (    
      <Container>

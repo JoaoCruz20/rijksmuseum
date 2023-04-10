@@ -1,7 +1,6 @@
+
 const Randomizer = (page: number) => {
-    let resultpage = (Math.random() * page);
-    let result = Math.round(resultpage);
-    return result;
+    return Math.round((Math.random() * page));
 }
 
 export default Randomizer;
