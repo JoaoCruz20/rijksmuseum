@@ -36,11 +36,12 @@ DONE -> Redo Footer -> Make the Form actually send an email -> I am fixing the e
 DONE -> Fix NavBar, It breaks if in a different page -> Removed Link in two of the Buttons
 DONE -> Make it 100% mobile viable
 DONE -> Fix the Welcome to the Rijksmuseum h1 tag and Buttons/Inputs -> buttons done
-Refactor the any type. refactor any possible logic to make the website much more smoother experience
 DONE -> Add to the about Page
+DONE -> add the real email for rijkmuseum
 
 
 //Later
+-> Refactor the any type. refactor any possible logic to make the website much more smoother experience
 -> add a bot component that will help
 -> Refactor any CSS and use better dynamic CSS
 -> read the background color and change text based on that(IntroCard and Carousel)

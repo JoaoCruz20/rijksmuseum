@@ -33,7 +33,7 @@ height: 100%;
 object-fit: cover;
 `;
 
-const countImages = (array: Array<any>) =>{            
+const countImages = (array: string[]) =>{            
   let imageNumb = Math.round(Math.random() * array.length);
   let Image = array[imageNumb];
   return Image;        

@@ -78,9 +78,9 @@ const Form = () => {
 
   const onSubmit= () => {
     if(state.name !== "" && state.email !== ""){
-      window.location.href = `mailto:user@example.com?subject=${state?.name}'s NewsLetter&body=message%20goes%20here`
+      window.location.href = `mailto:info@rijksmuseum.nl?subject=${state?.name}'s NewsLetter&body=message%20goes%20here`
     }else {
-      window.location.href = `mailto:user@example.com?subject=Subject&body=message%20goes%20here`
+      window.location.href = `mailto:info@rijksmuseum.nl?subject=Subject&body=message%20goes%20here`
     }    
   }
 
