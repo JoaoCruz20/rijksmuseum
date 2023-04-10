@@ -22,22 +22,26 @@ Make Components extende instead of completely changed to avoid problems.
 // to improve performance memo the React Components
 // use useCallback and useMemo
 // dynamic import?
-// lazy loading
-// Web Workers
+// lazy loading - React Lazy
+// Web Workers - To check
 
 
 DONE -> TransForm certaing values such has the APIkey into global variables. -> API key has been made a global
 DONE -> The randomizer function has been made into a external function that is being reused. -> now the fetch function needs to be done
 DONE -> Add npm package to make values anonymous so that no one can see it. -> make env method and create mask in github -> there are no Masks in Github and .ENV should be in Middleware
-Finish/fix the Carrousel component so that it properly works (useMemo) -> has been made more efficient with SetInterval done properly -> make sure that if no image is displayed a default one is
-Refactor the Search Engine using the SOLID principles and useReducer for the SearchForm
-Finish the Search Engine with the Search input
-DONE -> Redo Footer -> Make the Form actually send an email -> I am fixing the everything but the input doesn't send anything
+DONE -> Finish/fix the Carrousel component so that it properly works (useMemo) -> has been made more efficient with SetInterval done properly -> make sure that if no image is displayed a default one is
+DONE -> Refactor the Search Engine using the SOLID principles and useReducer for the SearchForm -> after reviewing, useReducer is not the best. It is one input and we receive continous feeback while the data is being input. useState has been choosen for it. Some chnages have been made, especially giving types. We used Fuctional Proggraming opposed to SOLID
+DONE -> Finish the Search Engine with the Search input
+DONE -> Redo Footer -> Make the Form actually send an email -> I am fixing the everything but the input doesn't send anything -> used useReducer in the Form for it is several values sent without feedback given while the data is being given
 DONE -> Fix NavBar, It breaks if in a different page -> Removed Link in two of the Buttons
 DONE -> Make it 100% mobile viable
-Fix the Welcome to the Rijksmuseum h1 tag and Buttons/Inputs -> buttons done
+DONE -> Fix the Welcome to the Rijksmuseum h1 tag and Buttons/Inputs -> buttons done
+Refactor the any type. refactor any possible logic to make the website much more smoother experience
+DONE -> Add to the about Page
+
 
 //Later
 -> add a bot component that will help
 -> Refactor any CSS and use better dynamic CSS
--> read the background color and change text based on that
+-> read the background color and change text based on that(IntroCard and Carousel)
+-> pagination on results -> will be the hardest pagination done so far
