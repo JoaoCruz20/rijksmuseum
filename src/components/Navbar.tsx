@@ -148,8 +148,6 @@ li{
         text-decoration: underline; 
     }
 }
-
-
 `;
 
 
@@ -184,7 +182,6 @@ const Navbar = () => {
     })
 
     return(
-
         <Container>
             {isMobile ?
             <>
