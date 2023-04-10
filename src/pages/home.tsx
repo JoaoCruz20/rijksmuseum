@@ -21,7 +21,7 @@ const Home = () => {
 
 function delayForDemo(promise:any) {
     return new Promise(resolve => {
-      setTimeout(resolve, 4000);
+      setTimeout(resolve, 2000);
     }).then(() => promise);
 }
   
