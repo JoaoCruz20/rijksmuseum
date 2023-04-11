@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
-import Menu from '../assets/icons/burger-menu.svg';
-import IconArrow from '../assets/icons/icon-arrow.svg';
 
 const Container = styled.ul`
-margin: 0% 1% 1% 1%;
+margin: 0% 1% 1% 0%;
 list-style-type: none;
 overflow: hidden;
 display:flex;
 justify-content:center;
+padding: 0 0 0 0;
 
 li {
     display: flex;
@@ -89,9 +88,10 @@ h1 {
 `;
 
 const MobileContainer = styled.div` 
-margin: 0 0 4% 0;
+margin: 0 0 10% 0;
 display: flex;
-justify-content: flex-start;
+flex-direction: column;
+justify-content: center;
 width: 100%;
 height: 100%;
 
@@ -100,9 +100,14 @@ button {
     color: black;
     margin: 0 7px 0 7px; 
 }
+h1 {
+    display: flex;
+    justify-content: center;
+    margin: 10px 5px;
+}
 
-h1{
-    margin: 10px 30px 10px 10px
+div{
+    margin: 0;
 }
 
 img{
@@ -115,17 +120,14 @@ const HambuguerDisplay = styled.div`
 display: flex;
 justify-content: center;
 width: 100%;
-
 button {
     margin: 0 7px 0 7px; 
 }
-
 img {
     height: 40px;
     width: 40px;
     transform: rotate(180deg);
 }
-
 li{
     border: none;
     box-shadow: none;
@@ -135,14 +137,11 @@ li{
     &:last-child {
         border-right: none;
     }
-
     a{
         margin: 0;
         padding: 0;
     }
-
     button {
-        background-color: white;
         border: none;
         text-align: center;
         text-decoration: underline; 
@@ -150,14 +149,12 @@ li{
 }
 `;
 
-
 const LinkCss = {
     textDecoration: "none",
 }
 
 const Navbar = () => {
     const[isMobile, setIsMobile] = useState(true)
-    const[buttonClicked, setButtonClicked] = useState(true)
 
     const windowDown = (e:any) => {
        let text = e?.target?.textContent
@@ -199,19 +196,12 @@ const Navbar = () => {
             <MobileContainer>
                     <div>
                         <h1>Rijksmuseum</h1>
-                    </div>
-                    <div>
-                        {buttonClicked ?
-                         <button onClick={() => setButtonClicked(false)}><img alt="MobileMenu" src={Menu}/></button>
-                          : 
-                            <HambuguerDisplay>
-                                <button onClick={() => setButtonClicked(true)}><img alt="MobileMenu" src={IconArrow}></img></button>
-                                <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Work</button></li>
-                                <li><Link to="/about" style={LinkCss}><button>About</button></Link></li>
-                                <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Contact</button></li>
-                            </HambuguerDisplay>
-                          }                    
-                    </div>                
+                    </div>                                      
+                      <HambuguerDisplay>
+                          <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Work</button></li>
+                          <li><Link to="/about" style={LinkCss}><button>About</button></Link></li>
+                          <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Contact</button></li>
+                      </HambuguerDisplay>                     
             </MobileContainer>
             }
         </Container>

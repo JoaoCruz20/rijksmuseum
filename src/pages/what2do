@@ -25,7 +25,6 @@ Make Components extende instead of completely changed to avoid problems.
 // lazy loading - React Lazy
 // Web Workers - To check
 
-
 DONE -> TransForm certaing values such has the APIkey into global variables. -> API key has been made a global
 DONE -> The randomizer function has been made into a external function that is being reused. -> now the fetch function needs to be done
 DONE -> Add npm package to make values anonymous so that no one can see it. -> make env method and create mask in github -> there are no Masks in Github and .ENV should be in Middleware
@@ -41,6 +40,10 @@ DONE -> add the real email for rijkmuseum
 
 
 //Later
+DONE -> Refactor all of the Mobile Version
+-> Improve the Mobile Version
+-> Add a back button to search page and useMemo to remeber the data that was open before
+-> Redo the ReadME.md File
 -> Refactor the any type. refactor any possible logic to make the website much more smoother experience
 -> add a bot component that will help
 -> Refactor any CSS and use better dynamic CSS

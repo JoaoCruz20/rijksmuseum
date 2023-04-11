@@ -14,6 +14,11 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
 div {
   padding: 5% 0 0 0;
   flex-direction:column;
+  justify-content: center;
+  h1{
+    display:flex;
+    justify-content: center;
+  }
 }
 p {
   display:flex;
@@ -64,7 +69,8 @@ const fetcher = async (finalurl:string) => {
 
 const IntroCard = () => {
     const url = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}&imgonly=true&p=`;
-    const [Image, setImage] = useState("");    
+    const [Image, setImage] = useState("");
+    const [isMobile, setIsMobile] = useState(true);    
     
     const getMyData = async (url:string, pageresults:number) => {  
         const image = await fetcher(url + pageresults)
@@ -75,10 +81,23 @@ const IntroCard = () => {
       getMyData(url,Randomizer(1000));            
     }, [url]);
 
+    useEffect(()=> {
+      let interval = setInterval(() =>{
+          if(window.innerWidth < 881){
+              setIsMobile(false)
+          } else {
+              setIsMobile(true)
+          }
+      }, 500)
+      return () => clearInterval(interval)
+  })
+
     return (    
      <Container style={{backgroundImage:`url('${Image}')`}}>
       <div>
+        {isMobile ? 
         <h1>Welcome to the Rijksmuseum</h1>
+        : <h1>Welcome to<br></br> to the Rijksmuseum</h1>}
         <ButtonContainer>
           <Link to="/about" style={LinkStyle}>Get to Know us</Link>
         </ButtonContainer>

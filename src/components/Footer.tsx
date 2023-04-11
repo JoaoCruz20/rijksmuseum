@@ -4,6 +4,7 @@ import Form from "./Form";
 import Location from "./Location";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
 import '../assets/fonts/Rijksmuseum-Bold.woff2';
+import { useEffect, useState } from "react";
 
 const Container = styled.footer`
 display:flex;
@@ -55,17 +56,41 @@ a {
   }
 `;
 
+
+
 const Footer = () => {
-    return (    
+  const [isMobile, setIsMobile] = useState(true); 
+
+  useEffect(()=> {
+    let interval = setInterval(() =>{
+        if(window.innerWidth < 881){
+            setIsMobile(false)
+        } else {
+            setIsMobile(true)
+        }
+    }, 500)
+    return () => clearInterval(interval)
+})
+    return ( 
      <Container>
+      {isMobile ?
            <FirstBody>         
                   <h1>Get To Know Us Everyday</h1>
                   <h4>Subscribe to our Newsletter</h4>
                   <Form />               
-           </FirstBody>      
+           </FirstBody>
+           : <FirstBody>
+              <h4>Subscribe to our Newsletter</h4>
+              <Form /> 
+           </FirstBody> }      
+           {isMobile ? 
            <SecondBody>        
                <Location />      
            </SecondBody>
+           :
+           <SecondBody>        
+              <Location />      
+           </SecondBody>}
     </Container>    
     );
   }

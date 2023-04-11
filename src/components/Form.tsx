@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
-import { useReducer, useState } from "react";
-import { ActionFunction } from "react-router-dom";
-import { Action } from "@remix-run/router";
+import { useReducer } from "react";
 
 const Container = styled.div`
 width:100%;
@@ -12,7 +10,7 @@ const InputContainer = styled.form`
 display:flex;
 flex-direction: row;
 justify-content:center;
-
+flex-wrap: wrap;
 input {
   display:flex;
   margin: 0 2% 3% 0;

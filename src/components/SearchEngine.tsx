@@ -144,6 +144,7 @@ const Search = () => {
     const [completedSearch, setCompletedSearch] = useState<boolean>(true);
     const [isReceived, setIsReceived] = useState<boolean>(false);
     const [researchData, setResearchData] = useState<any>();
+    const [isMobile, setIsMobile] = useState(true);  
     
     const firstDataFetcher = async (url:string) => {
         let data = await fetcher(url, "call")
@@ -198,6 +199,17 @@ const Search = () => {
     }, []);
 
     useEffect(()=> {
+        let interval = setInterval(() =>{
+            if(window.innerWidth < 881){
+                setIsMobile(false)
+            } else {
+                setIsMobile(true)
+            }
+        }, 500)
+        return () => clearInterval(interval)
+    })
+
+    useEffect(()=> {
         if(search !== ""){       
         let timeout = setTimeout(()=> {
           let data = fetcher(`https://www.rijksmuseum.nl/api/nl/collection?key=XmkBt1Tj&involvedMaker&q=${search}`, "search")
@@ -217,8 +229,8 @@ const Search = () => {
     }, [search])
 
     return (    
-     <Container>        
-        <h1>Search Engine</h1>
+     <Container>
+        {isMobile ? <h1>Search Engine</h1> : <h1>Search</h1>}        
         <SearchInputContainer onSubmit={handleSubmit}>    
             <input placeholder="Search" value={search} onChange={(e)=> handleChange(e)}/>           
         </SearchInputContainer>
@@ -231,10 +243,11 @@ const Search = () => {
         <ButtonContainer>
             <SubmitButton type="submit" onClick={handleSubmit}>Submit</SubmitButton>
         </ButtonContainer>
-       {completedSearch ? <SuggestedSearchContainer>            
-            {myArray?.map((value:string,index:Key | undefined) => (
+   
+       {completedSearch ?  <SuggestedSearchContainer>            
+             {myArray?.map((value:string,index:Key | undefined) => (
                 <SuggestedSearch type="button" onClick={(e) => Search(e)} key={`${index}-${value}`}>{value}</SuggestedSearch>
-            ))}            
+            ))}         
         </SuggestedSearchContainer> : 
         <SearchResults>               
                     <h3>Count: {researchData?.count}</h3>
@@ -255,7 +268,8 @@ const Search = () => {
              <NoResults>
                 <h1>Not Received</h1>
              </NoResults> }
-        </SearchResults> }    
+        </SearchResults> }
+
      </Container>
     );
 }
