@@ -19,4 +19,4 @@ The Search, I wanted to be a simple research to display the artists works. And s
 
 The carrousel is a sending a request for a random mage every 10sec.
 
-and then a simple input request for the name and email. And the address of the Museum.
+and then a simple input request for the name and email. And the address of the Museum. hhh
