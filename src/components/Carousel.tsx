@@ -45,7 +45,7 @@ const Carousel = () => {
         let data = await fetcher(url + pageresults, "call");
         let urls = data?.artObjects?.map((r:{webImage:{url:string}}) => r?.webImage?.url)          
         let image = countImages(urls);
-        setFinalImage(image);      
+        setFinalImage(image);    
     }, [])  
     
     useEffect(() => {

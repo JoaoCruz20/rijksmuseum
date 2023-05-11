@@ -1,157 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
+import WebNavbar from "./WebNavbar";
+import AppNavBar from "./AppNavBar";
 
-const Container = styled.ul`
-margin: 0% 1% 1% 0%;
+const Container = styled.div`
 list-style-type: none;
 overflow: hidden;
 display:flex;
 justify-content:center;
-padding: 0 0 0 0;
-
-li {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-left: 2px solid #000000;
-    margin: 20px 5px 15px 5px;
-    border-style: solid;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
-    &:last-child {
-        border-right: 2px solid #000000;
-    }
-
-    div {
-        border-style: 2px solid #000000;
-    }
-
-    
-  button {
-    color: black;
-    &:hover {
-        color: #d80032;
-        cursor: pointer;
-      }
-  }
-
- a {
-    color: black;
-    &:hover {
-        color: #d80032;
-        cursor: pointer;
-      }
-  } 
-}
-
-button {    
-     padding: 20px 10px 7px 10px;
-     font-size: 25px;
-     font-family: "Rijksmuseum-Normal", Times, serif;
-     text-decoration: none;
-     background-color: white;
-     border: none;
-    &:hover {
-      color: #3CA0E7;
-      cursor: pointer;
-    }
-  }
-
-  a {    
-    padding: 20px 10px 7px 10px;
-    font-size: 25px;
-    font-family: "Rijksmuseum-Normal", Times, serif;
-    background-color: white;
-    border: none;
-    &:hover {
-     color: #3CA0E7;
-     cursor: pointer;
-    }
- }
-
-h1 {
-    margin: 10px 10px 10px 10px;
-    font-size: 40px;
-    font-family: "Rijksmuseum-Normal", Times, serif;
-
-    &:hover {
-        transform: scale(1.05)
-    }
-}
-
-  li:hover {
-    cursor: pointer;
-  } 
-
 `;
 
-const MobileContainer = styled.div` 
-margin: 0 0 10% 0;
-display: flex;
-flex-direction: column;
-justify-content: center;
-width: 100%;
-height: 100%;
-
-button {
-    border-radius: 5px;
-    color: black;
-    margin: 0 7px 0 7px; 
-}
-h1 {
-    display: flex;
-    justify-content: center;
-    margin: 10px 5px;
-}
-
-div{
-    margin: 0;
-}
-
-img{
-    height: 40px;
-    width: 40px;
-}
-`;
-
-const HambuguerDisplay = styled.div` 
-display: flex;
-justify-content: center;
-width: 100%;
-button {
-    margin: 0 7px 0 7px; 
-}
-img {
-    height: 40px;
-    width: 40px;
-    transform: rotate(180deg);
-}
-li{
-    border: none;
-    box-shadow: none;
-    margin: 0 7px 0 7px;
-    text-decoration: underline; 
-
-    &:last-child {
-        border-right: none;
-    }
-    a{
-        margin: 0;
-        padding: 0;
-    }
-    button {
-        border: none;
-        text-align: center;
-        text-decoration: underline; 
-    }
-}
-`;
-
-const LinkCss = {
-    textDecoration: "none",
-}
 
 const Navbar = () => {
     const[isMobile, setIsMobile] = useState(true)
@@ -174,35 +33,16 @@ const Navbar = () => {
             } else {
                 setIsMobile(true)
             }
-        }, 500)
+        }, 300)
         return () => clearInterval(interval)
-    })
+    }) 
 
     return(
         <Container>
             {isMobile ?
-            <>
-            <li><Link to="/rijksmuseum" style={LinkCss}>Home</Link></li>
-            <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Work</button></li>
-            <li>
-                <div>
-                    <h1>Rijksmuseum</h1>
-                </div>
-            </li>
-            <li><Link to="/about" style={LinkCss}>About</Link></li>
-            <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Contact</button></li>
-            </>
+                <WebNavbar function={windowDown} />
             : 
-            <MobileContainer>
-                    <div>
-                        <h1>Rijksmuseum</h1>
-                    </div>                                      
-                      <HambuguerDisplay>
-                          <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Work</button></li>
-                          <li><Link to="/about" style={LinkCss}><button>About</button></Link></li>
-                          <li><button style={LinkCss} onClick={(e) => windowDown(e)}>Contact</button></li>
-                      </HambuguerDisplay>                     
-            </MobileContainer>
+                <AppNavBar function={windowDown} />
             }
         </Container>
     );

@@ -4,8 +4,8 @@ import '../assets/fonts/Rijksmuseum-Bold.woff2';
 
 const Container = styled.div`
 display:flex;
-justify-content:flex-end;
 h2 {
+    text-align: center;
     text-decoration: underline;
     font-family: "Rijksmuseum-Bold", Times, serif;
 }

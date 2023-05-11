@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../assets/fonts/Rijksmuseum-Normal.woff2';
@@ -10,6 +10,7 @@ justify-content: center;
 height:500px;
 border-style: solid;
 margin: 0 4% 2% 4%;
+overflow:hidden;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 div {
   padding: 5% 0 0 0;

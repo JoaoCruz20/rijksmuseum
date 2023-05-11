@@ -2,14 +2,16 @@
 import React, { Key, useEffect, useState} from "react";
 import styled from "styled-components";
 import fetcher from "../backend/fetcher";
-import { Link } from "react-router-dom";
+import Suggestions from "./Suggestions";
+import Results from "./Results";
 
 const Container = styled.div`
 display:flex;
 flex-direction:column;
 border-style: solid;
 margin: 0 4% 2% 4%;
-padding: 10% 25% 10% 25%;
+padding: 0 0 2% 0;
+justify-content: center;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     h1{
     display:flex;
@@ -22,7 +24,6 @@ display:flex;
 justify-content: center;
     input {
     padding: 7px 40px 7px 40px;
-    margin: 0 2% 0 0;
     font-size: 16px;
     letter-spacing: 2px;
     text-decoration: none;
@@ -32,29 +33,10 @@ justify-content: center;
     }
 `;
 
-const SuggestedSearchContainer = styled.div`
-display:flex;
-margin: 40px;
-flex-wrap: wrap;
-justify-content:center;
-`;
-
-const SuggestedSearch = styled.button`
-border-radius: 10px;
-border: 2px solid #000;
-padding :20px;
-background-color: #000;
-color: #ffffff;
-margin:5px;
-    &:hover{
-    transform: scale(1.1)
-    }
-`;
-
 const ButtonContainer = styled.div`
 display:flex;
 justify-content:center;
-margin:10px 0 0 0;
+margin: 10px 0 0 0;
 `;
 
 const SubmitButton = styled.button`
@@ -80,42 +62,22 @@ touch-action: manipulation;
   }  
 `;
 
-const SearchResults = styled.div`
-margin: 2% 0 2% 0;
-display: flex;
-justify-content:center;
-flex-direction:column;
-`;
-
-const ReceivedSearch = styled.div`
-height: 100%;
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-    h2{
-        margin:2%;
-
-    }
-    a {
-        color: black;
-        padding: 3% 0.2%;
-        text-decoration: none;
-        &:hover {
-            transform: scale(1.05)
-            color: blue;
-            text-decoration: underline;
-        }
-    }
-`;
-
-const InfoBlock = styled.div`
-flex-direction: row;
+const SuggestionsContainer = styled.div`
 display:flex;
+flex-wrap: wrap;
+justify-content:center;
+button{
+    width: 265px;
+    padding: 7px 40px 7px 7px;
+    font-size: 16px;
+    background-color: white;
+    text-align:left;
+    &:hover {
+        transform: scale(1.05);
+        text-decoration: underline;
+    }
+}
 `
-
-const NoResults = styled.div`
-content: "No Results";
-`;
 
 const SuggestionResults = styled.div`
 display:flex;
@@ -134,24 +96,28 @@ button{
 }
 `
 
-    const url:string = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}&toppieces=true`
-    const makerurl:string = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}`;
+const SuggestionResultsMobile = styled(SuggestionResults)`
+width: 265px;
+button{
+    width: 350px;
+}
+`
+
+const ResultsContainer = styled.div`
+display:flex;
+justify-content:center;
+`
+
+const url:string = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}&toppieces=true`
+const makerurl:string = `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.REACT_APP_API_KEY}`;
 
 const Search = () => {
-    const [myArray, setMyArray] = useState<string[]>();
     const [suggestions, setSuggestions] = useState<string[]>([]);      
     const [search, setSearch] = useState<string>('');
     const [completedSearch, setCompletedSearch] = useState<boolean>(true);
     const [isReceived, setIsReceived] = useState<boolean>(false);
     const [researchData, setResearchData] = useState<any>();
-    const [isMobile, setIsMobile] = useState(true);  
-    
-    const firstDataFetcher = async (url:string) => {
-        let data = await fetcher(url, "call")
-        // if anoniem do not repeat, make logic about that
-        const names: string[] = data?.artObjects?.map((r:{principalOrFirstMaker:string}) => r?.principalOrFirstMaker)
-        setMyArray(names)
-    }  
+    const [isMobile, setIsMobile] = useState(true);   
 
     const resultDataFetcher = async (url:string, param:string) =>{
         let makerurl:string = url + `&involvedMaker=${param}`
@@ -178,7 +144,8 @@ const Search = () => {
 
     const Search = (e:any) => {
       let search:string = e.target.textContent;
-      searchParams(search)    
+      searchParams(search)
+      setSearch("")
     }
 
     const textSearch = (search:string) => {
@@ -193,10 +160,6 @@ const Search = () => {
         e.preventDefault();
         textSearch(search)
     };
-
-    useEffect(() => {
-        firstDataFetcher(url);
-    }, []);
 
     useEffect(()=> {
         let interval = setInterval(() =>{
@@ -223,7 +186,7 @@ const Search = () => {
               } 
                 setSuggestions(bucket)                
            })
-        }, 500)
+        }, 300)
         return () => clearTimeout(timeout)
     }
     }, [search])
@@ -234,42 +197,34 @@ const Search = () => {
         <SearchInputContainer onSubmit={handleSubmit}>    
             <input placeholder="Search" value={search} onChange={(e)=> handleChange(e)}/>           
         </SearchInputContainer>
+        <SuggestionsContainer>
         {search ? suggestions.map((result:string, index: Key| undefined) => {
             return (
-            <SuggestionResults key={`div-${index}`} role="button" placeholder="Button to product">
-                <button key={`button-${index}`} onClick={(e)=> Search(e)}>{result}</button>
-            </SuggestionResults>
+            <div>
+            {isMobile ? 
+                <SuggestionResults key={`div-${index}`} role="button" placeholder="Button to product">
+                    <button key={`button-${index}`} onClick={(e)=> Search(e)}>{result}</button>
+                </SuggestionResults>
+             :  
+                <SuggestionResultsMobile key={`div-${index}`} role="button" placeholder="Button to product">
+                    <button key={`button-${index}`} onClick={(e)=> Search(e)}>{result}</button>
+                </SuggestionResultsMobile> 
+            }
+            </div>
         )}) : ""}
+        </SuggestionsContainer>
         <ButtonContainer>
             <SubmitButton type="submit" onClick={handleSubmit}>Submit</SubmitButton>
-        </ButtonContainer>
-   
-       {completedSearch ?  <SuggestedSearchContainer>            
-             {myArray?.map((value:string,index:Key | undefined) => (
-                <SuggestedSearch type="button" onClick={(e) => Search(e)} key={`${index}-${value}`}>{value}</SuggestedSearch>
-            ))}         
-        </SuggestedSearchContainer> : 
-        <SearchResults>               
-                    <h3>Count: {researchData?.count}</h3>
-            {isReceived ? <ReceivedSearch>
-                {researchData?.artObjects?.map((value: any,index: Key | null | undefined) => (
-                    <InfoBlock>
-                        <h2 key={index}>{value?.title}</h2>
-                        <Link to={{
-                            pathname:"/search",
-                            hash: `${index}`
-                        }} state={{
-                            data: value
-                        }}>
-                             Info&rarr;</Link>
-                    </InfoBlock>
-            ))} 
-            </ReceivedSearch> :
-             <NoResults>
-                <h1>Not Received</h1>
-             </NoResults> }
-        </SearchResults> }
-
+        </ButtonContainer>   
+        {completedSearch ? <div>
+        {isMobile ? 
+        <Suggestions url={url} search={Search} /> 
+        : "" }
+        </div>         
+        : 
+        <ResultsContainer>
+            <Results data={researchData} received={isReceived} />
+        </ResultsContainer> }
      </Container>
     );
 }

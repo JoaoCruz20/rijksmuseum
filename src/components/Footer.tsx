@@ -12,7 +12,7 @@ flex-direction:column;
 justify-content:center;
 flex-wrap: wrap;
 border-style: solid;
-margin: 0 4% 1% 4%;
+margin: 4% 4% 1% 4%;
 padding: 0 7% 0 7%;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `;
@@ -45,7 +45,6 @@ h1 {
 
 const SecondBody = styled.div` 
 display: flex;
-justify-content:flex-end;
 justify-content:center;
 margin: 1% 2% 1% 2%;
 a {    
