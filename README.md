@@ -1,3 +1,8 @@
+# Rijksmuseum App
+
+![Welcome to Rijksmuseum App!](./src/assets/images/rijkmuseumbanner.png "Rijksmuseum App Banner")
+
+### Old Description
 This is was my thought process behind the development of the App
 
 Pick of colors, theme, components, features ,setup. 

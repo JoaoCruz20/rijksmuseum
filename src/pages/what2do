@@ -45,6 +45,8 @@ DONE -> Refactor all of the Mobile Version
 DONE -> So the slow situation it is not due to perfomance but due to memory leaks that happen in event loop -> we need to refactor again and make the logic all out of React functions so that we can delete the memory we don't use -> we can't delete memory used since Javascript has a garbage collector and doesn't let us delete(high level language) -> So I removed some initial Homepage code,refactored some code and made parts of logic and code into components by themselfes. Used useMemo properly, all of these made a drastic improvement. The only component that is still slow(ish) is navbar because it accesses window, which is a global variable and type, and that makes it slow(for some reason), The rest is perfect.
 DONE -> Improve the Mobile Version -> Improved the NavBar and Footer -> improved and fixed a lot
 -> Needs the Results to be fixed in terms of visuals
+-> Web version of suggestions is broken
+-> Web Worker needs to be done
 -> Add a back button to search page and useMemo to remeber the data that was open before -> used memo properly making it remeber the Suggestion button, making performance better
 -> Redo the ReadME.md File
 -> Refactor the any type. refactor any possible logic to make the website much more smoother experience
